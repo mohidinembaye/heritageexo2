@@ -2,14 +2,12 @@
     "name": "pape-mohidine-mbaye/exo01",
     "autoload": {
         "psr-4": {
-            "App\\Config\\": "config/",
-            "App\\Database\\": "config/",
-            "App\\Repository\\": "src/repository/",
-            "App\\Controller\\": "src/controller/",
-            "App\\Core\\": "src/core/",
-            "App\\Entity\\": "src/entity/",
-            "App\\Service\\": "src/service/",
-            "App\\Dto\\": "src/dto/"
+            "App\\Controller\\": "src/Controller/",
+            "App\\Container\\": "src/Container/",
+            "App\\Dto\\": "src/Dto/",
+            "App\\Entity\\": "src/Entity/",
+            "App\\Repository\\": "src/Repository/",
+            "App\\Service\\": "src/Service/"
         }
     },
     "authors": [
