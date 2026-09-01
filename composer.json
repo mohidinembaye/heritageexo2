@@ -1,0 +1,20 @@
+{
+    "name": "pape-mohidine-mbaye/exo01",
+    "autoload": {
+        "psr-4": {
+            "App\\Repository\\": "src/repository/",
+            "App\\Controller\\": "src/controller/",
+            "App\\Core\\": "src/core/",
+            "App\\Entity\\": "src/entity/",
+            "App\\Service\\": "src/service/",
+            "App\\Dto\\": "src/dto/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mohidinembaye",
+            "email": "mohidinembaye@gmail.com"
+        }
+    ],
+    "require": {}
+}
