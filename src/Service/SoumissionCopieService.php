@@ -2,21 +2,17 @@
 
 namespace App\Service;
 
-use App\Dto\SoumettreCopieDTO;
-use App\Entity\CopieExamen;
-use App\Repository\CopieExamenRepository;
-
 final class SoumissionCopieService
 {
     public function __construct(
-        private readonly CalculNoteInterface $calculateur,
-        private readonly CopieExamenRepository $repository,
+        private readonly \App\Service\CalculNoteInterface $calculateur,
+        private readonly \App\Repository\CopieExamenRepository $repository,
     ) {
     }
 
-    public function soumettre(SoumettreCopieDTO $dto): CopieExamen
+    public function soumettre(\App\Dto\SoumettreCopieDTO $dto): \App\Entity\CopieExamen
     {
-        $copie = new CopieExamen(
+        $copie = new \App\Entity\CopieExamen(
             0,
             $dto->dateDepot,
             $dto->noteBrute,
@@ -27,7 +23,7 @@ final class SoumissionCopieService
         return $this->calculerEtEnregistrer($copie);
     }
 
-    public function calculerEtEnregistrer(CopieExamen $copie): CopieExamen
+    public function calculerEtEnregistrer(\App\Entity\CopieExamen $copie): \App\Entity\CopieExamen
     {
         $noteFinale = $copie->calculerNoteFinale($this->calculateur);
 
