@@ -1,9 +1,7 @@
 <?php
 
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/config/Database.php';
+$dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
-// Chargement du .env une seule fois, au point d'entrée unique
-$env = \App\Config\chargerEnv(dirname(__DIR__) . '/.env');
-$_ENV = array_merge($_ENV, $env);

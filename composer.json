@@ -1,7 +1,6 @@
 {
     "name": "pape-mohidine-mbaye/exo01",
     "autoload": {
-        "files": ["config/Database.php"],
         "psr-4": {
             "App\\Config\\": "config/",
             "App\\Controller\\": "src/Controller/",
@@ -18,5 +17,7 @@
             "email": "mohidinembaye@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.7"
+    }
 }
