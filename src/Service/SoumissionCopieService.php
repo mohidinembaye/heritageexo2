@@ -31,4 +31,21 @@ final class SoumissionCopieService
 
         return $this->repository->enregistrer($copie);
     }
+
+    public function lister(): array
+    {
+        return array_map(
+            \App\Dto\CopieExamenDto::fromEntity(...),
+            $this->repository->lister(),
+        );
+    }
+
+    public function trouver(int $id): ?\App\Dto\CopieExamenDto
+    {
+        $copie = $this->repository->trouver($id);
+
+        return $copie === null
+            ? null
+            : \App\Dto\CopieExamenDto::fromEntity($copie);
+    }
 }

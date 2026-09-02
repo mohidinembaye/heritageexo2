@@ -12,7 +12,7 @@ $service = new \App\Service\SoumissionCopieService(
 	new \App\Service\CalculNoteAvecRetardService(),
 	$repository,
 );
-$controller = new \App\Controller\CopieExamenController($service, $repository);
+$controller = new \App\Controller\CopieExamenController($service);
 
 $enregistrerRoutes = require dirname(__DIR__) . '/config/routes.php';
 $enregistrerRoutes($controller);
