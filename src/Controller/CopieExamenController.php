@@ -30,6 +30,16 @@ final class CopieExamenController
         header('Location: /copies', true, 303);
     }
 
+    public function liste(): void
+    {
+        $this->rendre('liste.php', ['copies' => $this->repository->lister()]);
+    }
+
+    public function detail(int $id): void
+    {
+        $this->rendre('detail.php', ['copie' => $this->repository->trouver($id)]);
+    }
+
     private function rendre(string $vue, array $donnees = [], int $code = 200): void
     {
         http_response_code($code);

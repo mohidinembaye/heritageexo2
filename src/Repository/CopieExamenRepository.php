@@ -22,4 +22,43 @@ final class CopieExamenRepository extends AbstractRepository
 
         return $copie;
     }
+
+    public function lister(): array
+    {
+        $lignes = $this->query(
+            'SELECT id, date_depot, note_brute, note_finale, penalite_appliquee, date_limite
+             FROM copies_examen
+             ORDER BY id DESC',
+            false,
+        );
+
+        return array_map(
+            fn (object $ligne): CopieExamen => $this->hydrater($ligne),
+            $lignes,
+        );
+    }
+
+    public function trouver(int $id): ?CopieExamen
+    {
+        $ligne = $this->executeQuery(
+            'SELECT id, date_depot, note_brute, note_finale, penalite_appliquee, date_limite
+             FROM copies_examen
+             WHERE id = :id',
+            ['id' => $id],
+        );
+
+        return $ligne === false ? null : $this->hydrater($ligne);
+    }
+
+    private function hydrater(object $ligne): CopieExamen
+    {
+        return new CopieExamen(
+            (int) $ligne->id,
+            new \DateTimeImmutable($ligne->date_depot),
+            (float) $ligne->note_brute,
+            (float) $ligne->penalite_appliquee > 0,
+            new \DateTimeImmutable($ligne->date_limite),
+            (float) $ligne->note_finale,
+        );
+    }
 }
