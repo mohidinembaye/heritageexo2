@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Controller;
+
+final class CopieExamenController
+{
+    public function __construct(
+        private readonly \App\Service\SoumissionCopieService $service,
+        private readonly \App\Repository\CopieExamenRepository $repository,
+    ) {
+    }
+
+    public function formulaire(): void
+    {
+        $this->rendre('home.php');
+    }
+
+    public function soumettre(): void
+    {
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+            http_response_code(405);
+            header('Allow: POST');
+
+            return;
+        }
+
+        try {
+            $dto = \App\Dto\SoumettreCopieDTO::fromRequest($_POST);
+            $this->service->soumettre($dto);
+        } catch (\InvalidArgumentException $exception) {
+            $this->rendre(
+                'erreur.php',
+                ['code' => 422, 'message' => $exception->getMessage()],
+                422,
+            );
+
+            return;
+        } catch (\Throwable) {
+            $this->rendre(
+                'erreur.php',
+                ['code' => 500, 'message' => "La soumission n'a pas pu etre enregistree."],
+                500,
+            );
+
+            return;
+        }
+
+        header('Location: /copies', true, 303);
+    }
+
+    public function liste(): void
+    {
+        $this->rendre('liste.php', ['copies' => $this->repository->lister()]);
+    }
+
+    public function detail(int $id): void
+    {
+        $this->rendre('detail.php', ['copie' => $this->repository->trouver($id)]);
+    }
+
+    private function rendre(string $vue, array $donnees = [], int $code = 200): void
+    {
+        http_response_code($code);
+        extract($donnees, EXTR_SKIP);
+        require dirname(__DIR__, 2) . '/templates/' . $vue;
+    }
+}
