@@ -12,6 +12,6 @@ final class CalculNoteAvecRetardService implements CalculNoteInterface
             return $copie->getNoteBrute();
         }
 
-        return $copie->getNoteBrute() - self::PENALITE_POINTS;
+        return max(0.0, $copie->getNoteBrute() - self::PENALITE_POINTS);
     }
 }
