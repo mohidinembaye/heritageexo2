@@ -30,11 +30,11 @@ $copies = $copies ?? [];
                 <tbody>
                     <?php foreach ($copies as $copie): ?>
                         <tr>
-                            <td><?= htmlspecialchars((string) $copie->getId(), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars($copie->getDateDepot()->format('Y-m-d'), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars((string) $copie->getNoteBrute(), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars((string) $copie->getNoteFinale(), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><a href="/copies/<?= rawurlencode((string) $copie->getId()) ?>">Voir</a></td>
+                            <td><?= htmlspecialchars((string) $copie->id, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($copie->dateDepot, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars((string) $copie->noteBrute, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars((string) $copie->noteFinale, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><a href="/copies/<?= rawurlencode((string) $copie->id) ?>">Voir</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
