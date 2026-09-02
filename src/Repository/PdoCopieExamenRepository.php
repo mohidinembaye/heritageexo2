@@ -41,9 +41,6 @@ final class PdoCopieExamenRepository extends AbstractRepository implements Copie
         return $this->hydrater($row);
     }
 
-    /**
-     * @return list<\App\Entity\CopieExamen>
-     */
     public function findAll(): array
     {
         $rows = $this->executeQuery(
@@ -78,7 +75,7 @@ final class PdoCopieExamenRepository extends AbstractRepository implements Copie
 
     private function hydrater(object $row): \App\Entity\CopieExamen
     {
-        return new \App\Entity\CopieExamen(
+        return \App\Entity\CopieExamen::fromPersistence(
             (int) $row->id,
             \App\Service\DateService::convertirDate((string) $row->date_depot, 'date_depot'),
             (float) $row->note_brute,

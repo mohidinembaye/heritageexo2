@@ -31,9 +31,14 @@ final class CopieExamen extends AbstractDocument
         return $this->dateLimite;
     }
 
-    public function calculerNoteFinale(\App\Service\CalculNoteInterface $calculateur): float
-    {
-        return $calculateur->calculerNoteFinale($this);
+    public static function fromPersistence(
+        int $id,
+        \DateTimeImmutable $dateDepot,
+        float $noteBrute,
+        bool $penaliteAppliquee,
+        \DateTimeImmutable $dateLimite,
+    ): self {
+        return new self($id, $dateDepot, $noteBrute, $penaliteAppliquee, $dateLimite);
     }
 
     private static function verifierNote(float $note, string $nom): void
