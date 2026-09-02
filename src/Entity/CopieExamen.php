@@ -4,8 +4,6 @@ namespace App\Entity;
 
 final class CopieExamen extends AbstractDocument
 {
-    private const TAUX_PENALITE = 0.10;
-
     public function __construct(
         int $id,
         \DateTimeImmutable $dateDepot,
@@ -33,11 +31,9 @@ final class CopieExamen extends AbstractDocument
         return $this->dateLimite;
     }
 
-    public function calculerNoteFinale(): float
+    public function calculerNoteFinale(\App\Service\CalculNoteInterface $calculateur): float
     {
-        return $this->penaliteAppliquee
-            ? round($this->noteBrute * (1.0 - self::TAUX_PENALITE), 2)
-            : $this->noteBrute;
+        return $calculateur->calculerNoteFinale($this);
     }
 
     private static function verifierNote(float $note, string $nom): void
