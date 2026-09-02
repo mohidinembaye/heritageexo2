@@ -11,4 +11,10 @@ return static function (\App\Controller\CopieExamenController $controller): void
         },
         'get',
     );
+
+    \Steampixel\Route::pathNotFound(
+        static function (string $path) use ($controller): void {
+            $controller->erreur(404, "La page {$path} n'existe pas.");
+        },
+    );
 };

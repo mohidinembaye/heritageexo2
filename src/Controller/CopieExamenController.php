@@ -6,7 +6,6 @@ final class CopieExamenController
 {
     public function __construct(
         private readonly \App\Service\SoumissionCopieService $service,
-        private readonly \App\Repository\CopieExamenRepository $repository,
     ) {
     }
 
@@ -50,12 +49,17 @@ final class CopieExamenController
 
     public function liste(): void
     {
-        $this->rendre('liste.php', ['copies' => $this->repository->lister()]);
+        $this->rendre('liste.php', ['copies' => $this->service->lister()]);
     }
 
     public function detail(int $id): void
     {
-        $this->rendre('detail.php', ['copie' => $this->repository->trouver($id)]);
+        $this->rendre('detail.php', ['copie' => $this->service->trouver($id)]);
+    }
+
+    public function erreur(int $code, string $message): void
+    {
+        $this->rendre('erreur.php', ['code' => $code, 'message' => $message], $code);
     }
 
     private function rendre(string $vue, array $donnees = [], int $code = 200): void
