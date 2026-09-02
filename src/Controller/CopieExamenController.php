@@ -24,8 +24,26 @@ final class CopieExamenController
             return;
         }
 
-        $dto = \App\Dto\SoumettreCopieDTO::fromRequest($_POST);
-        $this->service->soumettre($dto);
+        try {
+            $dto = \App\Dto\SoumettreCopieDTO::fromRequest($_POST);
+            $this->service->soumettre($dto);
+        } catch (\InvalidArgumentException $exception) {
+            $this->rendre(
+                'erreur.php',
+                ['code' => 422, 'message' => $exception->getMessage()],
+                422,
+            );
+
+            return;
+        } catch (\Throwable) {
+            $this->rendre(
+                'erreur.php',
+                ['code' => 500, 'message' => "La soumission n'a pas pu etre enregistree."],
+                500,
+            );
+
+            return;
+        }
 
         header('Location: /copies', true, 303);
     }
