@@ -23,3 +23,26 @@ REPONSE QUESTION 4:
 CONFIG:CONFIGURATION 
   database.php:gere les donnees de connexion a la base de donne;
   router.php:
+
+partie 3:
+
+REPONSE QUESTION 1:
+
+  La classe Database  a pour seule responsabilité d'instancier et de fournir l'objet PDO.
+
+  REPONSE QUESTION 2:
+Non. On crée une seule connexion par requête HTTP que l'on réutilise pour toutes les requêtes SQL,
+
+  REPONSE QUESTION 3:
+
+Dans un fichier de configuration isolé situé en dehors du dossier public/ et exclu de Git via .gitignore.
+
+REPONSE QUESTION 4:
+
+
+Sécurité : Il protège contre les injections SQL grâce aux requêtes préparées.
+
+
+
+Gestion des erreurs : Il transforme les erreurs SQL en exceptions PHP faciles à attraper.
+
